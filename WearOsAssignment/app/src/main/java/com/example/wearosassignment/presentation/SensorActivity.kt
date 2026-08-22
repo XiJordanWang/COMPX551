@@ -18,13 +18,13 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyListAnchorType
 import androidx.wear.compose.material3.ListHeader
 import androidx.wear.compose.material3.Text
 import androidx.wear.compose.material3.TitleCard
-import android.hardware.Sensor as Sensor1
+import android.hardware.Sensor 
 
 class SensorActivity : ComponentActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
-    private var accelerometer: Sensor1? = null
-    private var gyroscope: Sensor1? = null
-    private var light: Sensor1? = null
+    private var accelerometer: Sensor? = null
+    private var gyroscope: Sensor? = null
+    private var light: Sensor? = null
     private var map = mutableStateMapOf<String, FloatArray?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +37,9 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
         // Get references to standard sensors
-        accelerometer = sensorManager.getDefaultSensor(Sensor1.TYPE_ACCELEROMETER)
-        gyroscope = sensorManager.getDefaultSensor(Sensor1.TYPE_GYROSCOPE)
-        light = sensorManager.getDefaultSensor(Sensor1.TYPE_LIGHT)
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
     }
 
     override fun onResume() {
@@ -62,7 +62,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
-    override fun onAccuracyChanged(sensor: Sensor1?, accuracy: Int) {
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // Do something here if sensor accuracy changes.
     }
 
@@ -91,15 +91,15 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                         Text("\uD83D\uDCD0 Accelerometer")
                     }) {
                     Text(
-                        "X: ${map[Sensor1.STRING_TYPE_ACCELEROMETER]?.get(0) ?: "--"}",
+                        "X: ${map[Sensor.STRING_TYPE_ACCELEROMETER]?.get(0) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        "Y: ${map[Sensor1.STRING_TYPE_ACCELEROMETER]?.get(1) ?: "--"}",
+                        "Y: ${map[Sensor.STRING_TYPE_ACCELEROMETER]?.get(1) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        "Z: ${map[Sensor1.STRING_TYPE_ACCELEROMETER]?.get(2) ?: "--"}",
+                        "Z: ${map[Sensor.STRING_TYPE_ACCELEROMETER]?.get(2) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                 }
@@ -111,15 +111,15 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                         Text("\uD83C\uDF00 Gyroscope")
                     }) {
                     Text(
-                        "X: ${map[Sensor1.STRING_TYPE_GYROSCOPE]?.get(0) ?: "--"}",
+                        "X: ${map[Sensor.STRING_TYPE_GYROSCOPE]?.get(0) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        "Y: ${map[Sensor1.STRING_TYPE_GYROSCOPE]?.get(1) ?: "--"}",
+                        "Y: ${map[Sensor.STRING_TYPE_GYROSCOPE]?.get(1) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        "Z: ${map[Sensor1.STRING_TYPE_GYROSCOPE]?.get(2) ?: "--"}",
+                        "Z: ${map[Sensor.STRING_TYPE_GYROSCOPE]?.get(2) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                 }
@@ -131,7 +131,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                         Text("\uD83D\uDCA1 Light")
                     }) {
                     Text(
-                        "Lux: ${map[Sensor1.STRING_TYPE_LIGHT]?.get(0) ?: "--"}",
+                        "Lux: ${map[Sensor.STRING_TYPE_LIGHT]?.get(0) ?: "--"}",
                         textAlign = TextAlign.Center
                     )
                 }
