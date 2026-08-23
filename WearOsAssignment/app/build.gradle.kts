@@ -54,4 +54,15 @@ dependencies {
     // Add dependencies
     implementation("androidx.health:health-services-client:1.0.0-rc02")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.7.3")
+
+    // Tiles
+    implementation("androidx.wear.tiles:tiles:1.6.2")
+    implementation("androidx.wear.protolayout:protolayout:1.4.2")
+    implementation("androidx.wear.protolayout:protolayout-material:1.4.2")
+    implementation("androidx.wear.protolayout:protolayout-material3:1.4.2")
+    implementation("androidx.wear.protolayout:protolayout-expression:1.4.2")
+    implementation("com.google.guava:guava:33.3.1-android")
+
+    // Complications
+    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.3.0")
 }
