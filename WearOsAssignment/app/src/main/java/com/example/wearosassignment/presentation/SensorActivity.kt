@@ -65,6 +65,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
 
     private fun hasHeartRatePermission() = HeartRateMonitor.isPermitted(this)
 
+    // Check the device has the capabilities
     fun checkCapabilities() {
         val healthClient = HealthServices.getClient(this)
         measureClient = healthClient.measureClient
@@ -113,8 +114,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
         measuring = false
         lifecycleScope.launch {
             measureClient.unregisterMeasureCallbackAsync(
-                DataType.HEART_RATE_BPM,
-                heartRateCallback
+                DataType.HEART_RATE_BPM, heartRateCallback
             ).await()
         }
     }
@@ -139,8 +139,7 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
 
     val heartRateCallback = object : MeasureCallback {
         override fun onAvailabilityChanged(
-            dataType: DeltaDataType<*, *>,
-            availability: Availability
+            dataType: DeltaDataType<*, *>, availability: Availability
         ) {
             if (availability is DataTypeAvailability) {
                 // Handle availability change.
@@ -203,23 +202,18 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                 ListHeader { Name(" Sensor Activity") }
             }
             item {
-                TitleCard(
-                    onClick = {},
-                    title = {
-                        Text("\u2764\uFE0F Heart Rate")
-                    }) {
+                TitleCard(onClick = {}, title = {
+                    Text("\u2764\uFE0F Heart Rate")
+                }) {
                     Text(
-                        "${heartRate.toInt()} bpm",
-                        textAlign = TextAlign.Center
+                        "${heartRate.toInt()} bpm", textAlign = TextAlign.Center
                     )
                 }
             }
             item {
-                TitleCard(
-                    onClick = {},
-                    title = {
-                        Text("\uD83D\uDCD0 Accelerometer")
-                    }) {
+                TitleCard(onClick = {}, title = {
+                    Text("\uD83D\uDCD0 Accelerometer")
+                }) {
                     Text(
                         "X: ${map[Sensor.STRING_TYPE_ACCELEROMETER]?.get(0) ?: "--"}",
                         textAlign = TextAlign.Center
@@ -235,11 +229,9 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                 }
             }
             item {
-                TitleCard(
-                    onClick = {},
-                    title = {
-                        Text("\uD83C\uDF00 Gyroscope")
-                    }) {
+                TitleCard(onClick = {}, title = {
+                    Text("\uD83C\uDF00 Gyroscope")
+                }) {
                     Text(
                         "X: ${map[Sensor.STRING_TYPE_GYROSCOPE]?.get(0) ?: "--"}",
                         textAlign = TextAlign.Center
@@ -255,11 +247,9 @@ class SensorActivity : ComponentActivity(), SensorEventListener {
                 }
             }
             item {
-                TitleCard(
-                    onClick = {},
-                    title = {
-                        Text("\uD83D\uDCA1 Light")
-                    }) {
+                TitleCard(onClick = {}, title = {
+                    Text("\uD83D\uDCA1 Light")
+                }) {
                     Text(
                         "Lux: ${map[Sensor.STRING_TYPE_LIGHT]?.get(0) ?: "--"}",
                         textAlign = TextAlign.Center

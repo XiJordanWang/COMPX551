@@ -29,6 +29,7 @@ private const val RESOURCES_VERSION = "1"
  */
 class HeartRateTileService : TileService() {
 
+    // For Layout
     override fun onTileRequest(requestParams: TileRequest): ListenableFuture<Tile> {
         val reading = HeartRateStore.read(this)
 
@@ -37,14 +38,27 @@ class HeartRateTileService : TileService() {
             deviceConfiguration = requestParams.deviceConfiguration
         ) {
             primaryLayout(
-                titleSlot = { text(text = LayoutString("Heart Rate"), typography = Typography.LABEL_SMALL) },
+                // The titleSlot, typically for a primary title or header.
+                titleSlot = {
+                    text(
+                        text = LayoutString("Heart Rate"),
+                        typography = Typography.LABEL_SMALL
+                    )
+                },
+                // The mainSlot, for the core content.
                 mainSlot = {
                     text(
                         text = liveHeartRate(reading),
                         typography = Typography.NUMERAL_EXTRA_LARGE
                     )
                 },
-                bottomSlot = { text(text = LayoutString(subtitle(reading)), typography = Typography.BODY_SMALL) }
+                // The bottomSlot, often used for actions or supplemental information. This is also where an edge button appears.
+                bottomSlot = {
+                    text(
+                        text = LayoutString(subtitle(reading)),
+                        typography = Typography.BODY_SMALL
+                    )
+                }
             )
         }
 
@@ -52,13 +66,14 @@ class HeartRateTileService : TileService() {
             .setResourcesVersion(RESOURCES_VERSION)
             // Ask the system to re-request the layout periodically, so a stale reading
             // does not sit on screen indefinitely.
-            .setFreshnessIntervalMillis(TimeUnit.MINUTES.toMillis(1))
+            .setFreshnessIntervalMillis(TimeUnit.MINUTES.toMillis(1)) // ？
             .setTileTimeline(Timeline.fromLayoutElement(layout))
             .build()
 
         return Futures.immediateFuture(tile)
     }
 
+    // For pictures
     override fun onTileResourcesRequest(
         requestParams: ResourcesRequest
     ): ListenableFuture<Resources> =
